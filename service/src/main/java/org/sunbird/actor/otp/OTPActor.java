@@ -77,10 +77,10 @@ public class OTPActor extends BaseActor {
       otp = OTPUtil.generateOTP(request.getRequestContext());
       logger.info(
           request.getRequestContext(),
-          "OTPActor:generateOTP: new otp generated for Key = "
-              + OTPUtil.maskId(key, type)
-              + " & OTP = "
-              + OTPUtil.maskOTP(otp));
+          "OTPActor:generateOTP: new otp generated for Key = " + key
+//              + OTPUtil.maskId(key, type)
+              + " & OTP = ");
+//              + OTPUtil.maskOTP(otp));
       otpService.insertOTPDetails(type, key, otp, request.getRequestContext());
     } else {
       otp = (String) details.get(JsonKey.OTP);
