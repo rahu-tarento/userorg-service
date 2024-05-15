@@ -69,15 +69,35 @@ public class KeyCloakServiceImpl implements SSOManager {
     try {
       String fedUserId = getFederatedUserId(userId);
       UserResource ur = keycloak.realm(KeyCloakConnectionProvider.SSO_REALM).users().get(fedUserId);
+      logger.info("################## SSO Realm: " + KeyCloakConnectionProvider.SSO_REALM);
+      
       CredentialRepresentation cr = new CredentialRepresentation();
+      logger.info("################## CredentialRepresentation.PASSWORD type: " + CredentialRepresentation.PASSWORD);
+      
       cr.setType(CredentialRepresentation.PASSWORD);
+      logger.info("################## password: " + password);
+      
       cr.setValue(password);
+      userRepresentation(ur);
+      
       ur.resetPassword(cr);
       return true;
     } catch (Exception e) {
+      logger.info("Full stacktrace");
+      e.printStackTrace();
       logger.error(context, "updatePassword: Exception occurred: ", e);
     }
     return false;
+  }
+
+    private void userRepresentation(UserResource ur) {
+      UserRepresentation userRep = ur.toRepresentation();
+      logger.info("############ userRep mail" + userRep.getEmail());
+      logger.info("############ userRep id" + userRep.getId());
+      logger.info("############ userRep username" + userRep.getUsername());
+      logger.info("############ userRep origin" + userRep.getOrigin());
+      logger.info("############ userRep client id" + userRep.getServiceAccountClientId());
+      logger.info("############ userRep client role " + userRep.getClientRoles());
   }
 
   /**
