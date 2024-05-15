@@ -43,6 +43,15 @@ public class KeyCloakConnectionProvider {
     if (keycloak != null) {
       return keycloak;
     }
+  
+    logger.info(">>>>>>>>>>>>>>>>>>>>> JsonKey.SSO_URL: " + JsonKey.SSO_URL);
+    logger.info(">>>>>>>>>>>>>>>>>>>>> JsonKey.SSO_REALM: " + JsonKey.SSO_REALM);
+    logger.info(">>>>>>>>>>>>>>>>>>>>> JsonKey.SSO_USERNAME: " + JsonKey.SSO_USERNAME);
+    logger.info(">>>>>>>>>>>>>>>>>>>>> JsonKey.SSO_PASSWORD: " + JsonKey.SSO_PASSWORD);
+    logger.info(">>>>>>>>>>>>>>>>>>>>> JsonKey.SSO_CLIENT_ID: " + JsonKey.SSO_CLIENT_ID);
+    logger.info(">>>>>>>>>>>>>>>>>>>>> JsonKey.SSO_CLIENT_SECRET: " + JsonKey.SSO_CLIENT_SECRET);
+
+    
     KeycloakBuilder keycloakBuilder =
         KeycloakBuilder.builder()
             .serverUrl(cache.getProperty(JsonKey.SSO_URL))
